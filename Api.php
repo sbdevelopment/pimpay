@@ -1,5 +1,19 @@
 <?php
-
+/**
+ * PimPay Platform Api SDK (Modified by @sbdevelopment)
+ *
+ * Дата генерации SDK: 2017-11-23 20:37:45
+ * Версия API: v2_6
+ * Ссылка на WSDL:     http://platform.api.pimpay.ru/v2_6/soap/wsdl
+ * Ссылка сайт API:    http://platform.api.pimpay.ru/
+ *
+ * Минимальные требования:
+ *  PHP 5.2.0+
+ *  Расширения:
+ *      dom, zlib, soap
+ *      Для GnuPG: gnupg
+ *      Для OpenSSL: openssl + php 5.3
+ */
 namespace PimPay;
 
 use PimPay\SOAP\Client;
