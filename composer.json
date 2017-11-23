@@ -1,0 +1,7 @@
+{
+  "name": "SBDevelopment/PimPay",
+  "description": "Unique service for e-commerce in Russia - ``Cash Before Delivery``.",
+  "require": {
+    "php": "^5.6 || ^7.0"
+  }
+}
