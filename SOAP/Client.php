@@ -2,6 +2,8 @@
 
 namespace PimPay\SOAP;
 
+use PimPay\Api;
+
 class Client extends SoapClient
 {
     /** @var Api */
