@@ -2,6 +2,8 @@
 
 namespace PimPay\Security;
 
+use PimPay\SOAP\Client;
+
 class GNUPG implements CryptoHandler
 {
     /** @var string Содержимое переменной окружения GNUPGHOME, путь до .gnupg */
@@ -20,13 +22,13 @@ class GNUPG implements CryptoHandler
      * @param  $gnuPgHome            string       Содержимое переменной окружения GNUPGHOME, путь до .gnupg
      * @param  $singKeyFingerprint   string       Отпечаток ключа, используемого для подписания запросов
      * @param  $signKeyPassphrase    string|null  Пароль от ключа (если есть)
-     * @throws PimPayApi_Exception
+     * @throws \Exception
      */
     public function __construct($gnuPgHome, $singKeyFingerprint, $signKeyPassphrase)
     {
         if (!extension_loaded('gnupg'))
         {
-            throw new PimPayApi_Exception("gnupg extension is not loaded.");
+            throw new \Exception("gnupg extension is not loaded.");
         }
 
         $this->_gnuPgHome          = $gnuPgHome;
@@ -47,12 +49,12 @@ class GNUPG implements CryptoHandler
 
     /**
      * @param string $requestXml
-     * @param PimPayApi_SoapClient $soapClient
+     * @param Client $soapClient
      * @return string Request XML
      */
-    public function injectSignature($requestXml, PimPayApi_SoapClient $soapClient)
+    public function injectSignature($requestXml, Client $soapClient)
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($requestXml);
 
         $bodyNodesList = $dom->getElementsByTagName('Body');
@@ -80,12 +82,12 @@ class GNUPG implements CryptoHandler
 
         if (!gnupg_addsignkey($this->_gnuPg, str_replace(' ', '', $this->_singKeyFingerprint), $this->_signKeyPassphrase))
         {
-            throw new PimPayApi_Exception("Не удалось добавить GNUPG ключ для подписи запросов");
+            throw new \Exception("Не удалось добавить GNUPG ключ для подписи запросов");
         }
 
         if (!gnupg_setsignmode($this->_gnuPg, GNUPG_SIG_MODE_DETACH))
         {
-            throw new PimPayApi_Exception("Не удалось установить режим раздельной подписи");
+            throw new \Exception("Не удалось установить режим раздельной подписи");
         }
 
         $info = gnupg_keyinfo($this->_gnuPg, '');

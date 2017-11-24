@@ -2,6 +2,8 @@
 
 namespace PimPay\Security;
 
+use PimPay\SOAP\Client;
+
 class OpenSSL implements CryptoHandler
 {
     /** @var string Private key */
@@ -16,18 +18,18 @@ class OpenSSL implements CryptoHandler
     /**
      * @param  $privateKey string Приватный ключ
      * @param  $digestAlgo string Алгоритм хэширования содержимого
-     * @throws PimPayApi_Exception
+     * @throws \Exception
      */
     public function __construct($privateKey, $digestAlgo)
     {
         if (!extension_loaded('openssl'))
         {
-            throw new PimPayApi_Exception("openssl extension is not loaded.");
+            throw new \Exception("openssl extension is not loaded.");
         }
 
         if (!in_array($digestAlgo, $this->_supportedDigestAlgos, true))
         {
-            throw new PimPayApi_Exception("Unsupported OpenSSL digest algo: $digestAlgo.");
+            throw new \Exception("Unsupported OpenSSL digest algo: $digestAlgo.");
         }
 
         $this->_privateKey = $privateKey;
@@ -48,10 +50,10 @@ class OpenSSL implements CryptoHandler
 
     /**
      * @param string $requestXml
-     * @param PimPayApi_SoapClient $soapClient
+     * @param Client $soapClient
      * @return string Request XML
      */
-    public function injectSignature($requestXml, PimPayApi_SoapClient $soapClient)
+    public function injectSignature($requestXml, Client $soapClient)
     {
         $signature = $this->sign($requestXml);
         stream_context_set_option($soapClient->getStreamContext(), 'http', 'header', 'X-Request-Signature: ' . $signature);

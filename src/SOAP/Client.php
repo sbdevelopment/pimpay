@@ -26,9 +26,9 @@ class Client extends \SoapClient
 
         $this->_api = $api;
 
-        $clientHeader    = new SoapHeader('urn:PlatformApiWsdl', 'client',    'phpSdk @ 2017-11-23 20:37:45', false);
-        $versionHeader   = new SoapHeader('urn:PlatformApiWsdl', 'version',   'v2_6', false);
-        $signatureHeader = new SoapHeader('urn:PlatformApiWsdl', 'signature', null, false);
+        $clientHeader    = new \SoapHeader('urn:PlatformApiWsdl', 'client',    'phpSdk @ 2017-11-23 20:37:45', false);
+        $versionHeader   = new \SoapHeader('urn:PlatformApiWsdl', 'version',   'v2_6', false);
+        $signatureHeader = new \SoapHeader('urn:PlatformApiWsdl', 'signature', null, false);
         $this->__setSoapHeaders(array($clientHeader, $versionHeader, $signatureHeader));
     }
 

@@ -184,7 +184,7 @@ class Api
                 $itemXml .= '/>';
             }
 
-            $requestRows[] = new SoapVar($itemXml, XSD_ANYXML);
+            $requestRows[] = new \SoapVar($itemXml, XSD_ANYXML);
         }
 
         return $this->_getSoapClient()->sendVerification($this->_token, $tin, $id, $paymentOrder, $requestRows);
