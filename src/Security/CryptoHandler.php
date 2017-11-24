@@ -2,6 +2,8 @@
 
 namespace PimPay\Security;
 
+use PimPay\SOAP\Client;
+
 interface CryptoHandler
 {
     /**
@@ -12,8 +14,8 @@ interface CryptoHandler
 
     /**
      * @param string  $requestXml
-     * @param SoapClient $soapClient
+     * @param Client $soapClient
      * @return string Request XML
      */
-    function injectSignature($requestXml, SoapClient $soapClient);
+    function injectSignature($requestXml, Client $soapClient);
 }

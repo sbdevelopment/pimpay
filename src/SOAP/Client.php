@@ -4,7 +4,7 @@ namespace PimPay\SOAP;
 
 use PimPay\Api;
 
-class Client extends SoapClient
+class Client extends \SoapClient
 {
     /** @var Api */
     protected $_api;
