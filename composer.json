@@ -2,7 +2,7 @@
   "name": "sbdevelopment/pimpay",
   "description": "Unique service for e-commerce in Russia - ``Cash Before Delivery``.",
   "require": {
-    "php": "^5.6 || ^7.0"
+    "php": "^5.3 || ^7.0"
   },
   "autoload": {
     "classmap": [
